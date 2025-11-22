@@ -1,3 +1,4 @@
 models/configs/git a
 *.pkl
 *.yaml
+.conda
