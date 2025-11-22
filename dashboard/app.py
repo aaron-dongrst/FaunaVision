@@ -1,5 +1,5 @@
 """
-Streamlit Dashboard for ZooGuardian
+Streamlit Dashboard for FaunaVision
 Visualizes animal health classification results.
 """
 
@@ -19,7 +19,7 @@ def load_results(file_path: str) -> pd.DataFrame:
     return pd.read_excel(file_path)
 
 def main():
-    st.title("ZooGuardian Dashboard")
+    st.title("FaunaVision Dashboard")
     st.write("Visualize animal health classification results.")
     
     # File input

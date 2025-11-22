@@ -1,5 +1,5 @@
 """
-Vision Classifier for ZooGuardian
+Vision Classifier for FaunaVision
 Maps action labels to health categories ("Healthy" or "Not Healthy").
 """
 

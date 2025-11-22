@@ -1,5 +1,5 @@
 """
-Vision Engine for ZooGuardian
+Vision Engine for FaunaVision
 Classifies video clips into action labels using VideoMAE model.
 
 Model: MCG-NJU/videomae-base-finetuned-kinetics (Hugging Face)

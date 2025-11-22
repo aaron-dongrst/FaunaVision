@@ -1,5 +1,5 @@
 """
-Vet Reporter for ZooGuardian
+Vet Reporter for FaunaVision
 Generates summary reports of animal health classifications.
 """
 
