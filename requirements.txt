@@ -1,1 +1,19 @@
-test
+# Core ML and Video Processing
+transformers>=4.30.0
+torch>=2.0.0
+opencv-python>=4.8.0
+pillow>=10.0.0
+numpy>=1.24.0
+
+# Data Processing
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# Generative AI
+google-generativeai>=0.3.0
+
+# Dashboard
+streamlit>=1.28.0
+
+# Utilities
+python-dotenv>=1.0.0
