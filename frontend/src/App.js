@@ -7,11 +7,76 @@ function App() {
   const [animals, setAnimals] = useState([]);
   const [showWelcome, setShowWelcome] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [visibleSections, setVisibleSections] = useState({
+    video: false,
+    workflow: false
+  });
 
   useEffect(() => {
     // Smooth page load animation
     setIsLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (!showWelcome) return;
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const scrollingDown = currentScrollY > lastScrollY;
+          
+          if (scrollingDown) {
+            const videoSection = document.querySelector('[data-section="video"]');
+            const workflowSection = document.querySelector('[data-section="workflow"]');
+            
+            // Check if sections are in viewport
+            const checkSection = (section) => {
+              if (!section) return false;
+              const rect = section.getBoundingClientRect();
+              const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+              return rect.top < windowHeight * 0.8 && rect.bottom > 0;
+            };
+
+            if (videoSection && checkSection(videoSection)) {
+              setVisibleSections(prev => {
+                if (!prev.video) {
+                  return { ...prev, video: true };
+                }
+                return prev;
+              });
+            }
+            
+            if (workflowSection && checkSection(workflowSection)) {
+              setVisibleSections(prev => {
+                if (!prev.workflow) {
+                  return { ...prev, workflow: true };
+                }
+                return prev;
+              });
+            }
+          }
+          
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [showWelcome]);
 
   const addAnimal = () => {
     if (showWelcome) {
@@ -118,6 +183,77 @@ function App() {
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
+              
+              <div 
+                className={`example-video-section ${visibleSections.video ? 'fade-in-visible' : 'fade-in-hidden'}`}
+                data-section="video"
+              >
+                <h3 className="example-video-title">Example Video</h3>
+                <p className="example-video-description">See how it works with a sample pig behavior video</p>
+                <div className="video-container">
+                  <video 
+                    className="example-video" 
+                    controls 
+                    preload="metadata"
+                    poster="/example-video-poster.jpg"
+                  >
+                    <source src="/example-pig-video.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+
+              <div 
+                className={`workflow-section ${visibleSections.workflow ? 'fade-in-visible' : 'fade-in-hidden'}`}
+                data-section="workflow"
+              >
+                <h3 className="workflow-title">How It Works</h3>
+                <div className="workflow-steps">
+                  <div className="workflow-step">
+                    <div className="step-number">1</div>
+                    <div className="step-content">
+                      <h4 className="step-title">Upload Video</h4>
+                      <p className="step-description">Upload a video of your animal in their enclosure</p>
+                    </div>
+                  </div>
+                  <div className="workflow-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="workflow-step">
+                    <div className="step-number">2</div>
+                    <div className="step-content">
+                      <h4 className="step-title">Enter Animal Info</h4>
+                      <p className="step-description">Provide species, age, diet, and health conditions</p>
+                    </div>
+                  </div>
+                  <div className="workflow-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="workflow-step">
+                    <div className="step-number">3</div>
+                    <div className="step-content">
+                      <h4 className="step-title">AI Analysis</h4>
+                      <p className="step-description">Our AI analyzes behavior patterns and detects distress signals</p>
+                    </div>
+                  </div>
+                  <div className="workflow-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="workflow-step">
+                    <div className="step-number">4</div>
+                    <div className="step-content">
+                      <h4 className="step-title">Get Insights</h4>
+                      <p className="step-description">Receive detailed health assessment and recommendations</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ) : (

@@ -170,18 +170,40 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 60vh;
-  padding: 2rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(252, 231, 243, 0.3) 0%, rgba(251, 207, 232, 0.2) 100%);
+  border-radius: 24px;
+  margin: 2rem 0;
 }
 
 .welcome-content {
   text-align: center;
-  max-width: 700px;
+  max-width: 900px;
   background: var(--background-card);
   padding: 4rem 3rem;
-  border-radius: 24px;
+  border-radius: 32px;
   box-shadow: var(--shadow-xl);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   animation: scaleIn 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.welcome-content > * {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes scaleIn {
@@ -326,6 +348,243 @@ body {
   transform: translateX(4px);
 }
 
+/* Example Video Section */
+.example-video-section {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--border-color);
+  width: 100%;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  pointer-events: none;
+}
+
+.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.example-video-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+  background: var(--background-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.example-video-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.video-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 2px solid var(--border-color);
+  background: var(--background-card);
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.video-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 35px -5px rgba(236, 72, 153, 0.3), 0 10px 15px -3px rgba(236, 72, 153, 0.2);
+}
+
+.video-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background-gradient);
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.example-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+}
+
+/* Workflow Section */
+.workflow-section {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--border-color);
+  width: 100%;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.workflow-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+  text-align: center;
+  background: var(--background-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media (min-width: 769px) {
+  .workflow-steps {
+    gap: 0.5rem;
+  }
+}
+
+.workflow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+  max-width: 240px;
+  padding: 1.5rem;
+  background: var(--background-light);
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background-gradient);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+
+.workflow-step:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.workflow-step:hover::before {
+  opacity: 0.05;
+}
+
+.step-number {
+  width: 56px;
+  height: 56px;
+  background: var(--background-gradient);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.step-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.step-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.step-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.workflow-arrow {
+  width: 36px;
+  height: 36px;
+  color: var(--primary-color);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.3s, transform 0.3s;
+  margin: 0 0.25rem;
+}
+
+.workflow-arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+.workflow-step:hover ~ .workflow-arrow,
+.workflow-arrow:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .workflow-steps {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .workflow-arrow {
+    transform: rotate(90deg);
+    margin: 0.5rem 0;
+  }
+  
+  .workflow-step {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .workflow-step:last-child ~ .workflow-arrow {
+    display: none;
+  }
+}
+
 /* Main Content Area */
 .main-content {
   animation: fadeIn 0.6s ease-out;
@@ -400,8 +659,13 @@ body {
     padding: 1rem;
   }
 
+  .welcome-page {
+    padding: 1.5rem 1rem;
+  }
+
   .welcome-content {
     padding: 2.5rem 1.5rem;
+    border-radius: 24px;
   }
 
   .welcome-title {
@@ -410,6 +674,29 @@ body {
 
   .welcome-description {
     font-size: 1rem;
+  }
+
+  .example-video-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+
+  .example-video-title {
+    font-size: 1.5rem;
+  }
+
+  .workflow-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+  }
+
+  .workflow-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .workflow-step {
+    padding: 1.25rem;
   }
 
   .animals-container {

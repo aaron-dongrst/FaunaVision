@@ -6,16 +6,17 @@
 
 .upload-area {
   border: 2px dashed var(--border-color);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 3rem 2rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: var(--background-light);
+  background: linear-gradient(135deg, var(--background-light) 0%, rgba(252, 231, 243, 0.3) 100%);
   position: relative;
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
+  backdrop-filter: blur(10px);
 }
 
 .upload-area::before {
