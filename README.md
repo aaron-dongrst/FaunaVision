@@ -13,25 +13,16 @@ pip install ultralytics
 cd frontend && npm install
 ```
 
-### 2. Upload Videos ⭐
-Upload pig behavior videos to `data/pig_training/`:
+### 2. Upload Videos and Annotations ⭐
 
-- **Distress behaviors:**
-  - `train/tail_biting/` - Pigs biting tails
-  - `train/ear_biting/` - Pigs biting ears
-  - `train/aggression/` - Aggressive behavior
+**Option A: Using JSON Annotations (Recommended)**
+1. Place videos in `data/videos/`
+2. Place JSON annotation files in `data/annotations/` (same filename as video, but .json)
+3. Run: `./scripts/train_from_annotations.sh data/videos data/annotations`
 
-- **Normal behaviors:**
-  - `train/eating/` - Pigs eating
-  - `train/sleeping/` - Pigs sleeping
-  - `train/rooting/` - Pigs rooting
-
-**Split:** 80% train, 10% val, 10% test
-
-### 3. Train Model
-```bash
-./scripts/run_all_steps.sh
-```
+**Option B: Manual Organization**
+Upload videos to `data/pig_training/train/` folders (tail_biting, ear_biting, etc.)
+Then run: `./scripts/run_all_steps.sh`
 
 ### 4. Run Application
 ```bash
