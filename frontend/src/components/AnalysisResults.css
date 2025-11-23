@@ -1,7 +1,19 @@
 .analysis-results {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 2px solid #e2e8f0;
+  border-top: 2px solid var(--border-color);
+  animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .results-grid {
@@ -12,167 +24,240 @@
 }
 
 .result-card {
-  background: #fafafa;
-  padding: 1rem;
-  border-radius: 2px;
-  border: 1px solid #e0e0e0;
-  transition: border-color 0.2s;
+  background: var(--background-light);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s;
 }
 
 .result-card:hover {
-  border-color: #bdbdbd;
-}
-
-.result-card.health-status {
-  grid-column: 1 / -1;
-  background: #f5f5f5;
-}
-
-.result-card.health-status.healthy {
-  border-color: #4a9d3a;
-  background: #e8f5e9;
-}
-
-.result-card.health-status.unhealthy {
-  border-color: #d32f2f;
-  background: #ffebee;
-}
-
-.result-card.health-status.unknown {
-  border-color: #f57c00;
-  background: #fff3e0;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .result-label {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #718096;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.5rem;
 }
 
 .result-value {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  color: #2d3748;
-  word-break: break-word;
+  color: var(--text-primary);
 }
 
 .result-value-large {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2d3748;
 }
 
-.reasoning-section,
-.recommendations-section {
-  margin-top: 1.5rem;
-  padding: 1.25rem;
-  background: #fafafa;
-  border-radius: 2px;
-  border-left: 3px solid #ff8080;
+.health-status.healthy {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  border-color: #10b981;
 }
 
-.reasoning-title,
-.recommendations-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 1rem;
+.health-status.healthy .result-value-large {
+  color: #10b981;
 }
 
-.reasoning-text {
-  color: #4a5568;
-  line-height: 1.6;
-  margin: 0;
+.health-status.unhealthy {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+  border-color: #ef4444;
 }
 
-.recommendations-text {
-  color: #4a5568;
-  line-height: 1.8;
+.health-status.unhealthy .result-value-large {
+  color: #ef4444;
 }
 
-.recommendation-item {
-  padding: 0.5rem 0;
-  padding-left: 1.5rem;
-  position: relative;
+.health-status.unknown {
+  background: linear-gradient(135deg, rgba(148, 163, 184, 0.1) 0%, rgba(100, 116, 139, 0.1) 100%);
+  border-color: #94a3b8;
 }
 
-.recommendation-item::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #ff8080;
-  font-weight: bold;
-  font-size: 1.2rem;
+.health-status.unknown .result-value-large {
+  color: #94a3b8;
 }
 
 .behavior-percentages-section {
-  margin-top: 1.5rem;
-  padding: 1.25rem;
-  background: #fafafa;
-  border-radius: 2px;
-  border-left: 3px solid #ff8080;
+  margin-bottom: 2rem;
 }
 
 .percentages-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
 }
 
 .percentages-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-}
-
-.percentage-item {
-  display: flex;
-  align-items: center;
   gap: 1rem;
 }
 
+.percentage-item {
+  display: grid;
+  grid-template-columns: 120px 1fr 60px;
+  gap: 1rem;
+  align-items: center;
+}
+
 .percentage-label {
-  font-weight: 600;
-  color: #4a5568;
-  min-width: 100px;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-transform: capitalize;
 }
 
 .percentage-bar-container {
-  flex: 1;
-  height: 24px;
-  background: #e2e8f0;
-  border-radius: 2px;
+  height: 8px;
+  background: var(--background-light);
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
 }
 
 .percentage-bar {
   height: 100%;
-  background: #ff8080;
-  transition: width 0.3s ease;
-  border-radius: 2px;
+  background: var(--background-gradient);
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.percentage-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .percentage-value {
+  font-size: 0.875rem;
   font-weight: 600;
-  color: #2d3748;
-  min-width: 50px;
+  color: var(--text-secondary);
   text-align: right;
-  font-size: 0.9rem;
+}
+
+.reasoning-section {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: var(--background-light);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.recommendations-section {
+  margin-bottom: 1.5rem;
+}
+
+.reasoning-title,
+.recommendations-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+}
+
+.reasoning-title::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: var(--background-gradient);
+  border-radius: 2px;
+}
+
+.recommendations-title::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: var(--background-gradient);
+  border-radius: 2px;
+}
+
+.reasoning-text {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.recommendations-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.recommendation-item {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+  padding: 0.75rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border-color);
+  transition: all 0.3s;
+}
+
+.recommendation-item:hover {
+  border-left-color: var(--primary-color);
+  padding-left: 1.75rem;
+  color: var(--text-primary);
+}
+
+.recommendation-item::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: 700;
+  transition: transform 0.3s;
+}
+
+.recommendation-item:hover::before {
+  transform: translateX(4px);
 }
 
 @media (max-width: 768px) {
   .results-grid {
     grid-template-columns: 1fr;
   }
-  
-  .result-card.health-status {
-    grid-column: 1;
+
+  .percentage-item {
+    grid-template-columns: 100px 1fr 50px;
+    gap: 0.75rem;
+  }
+
+  .percentage-label {
+    font-size: 0.8125rem;
+  }
+
+  .percentage-value {
+    font-size: 0.8125rem;
   }
 }
-

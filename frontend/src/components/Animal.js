@@ -39,21 +39,12 @@ const Animal = ({ animal, onUpdate, onRemove, canRemove }) => {
     formData.append("age", animal.animal.age || "");
     formData.append("diet", animal.animal.diet || "");
     formData.append("health_conditions", animal.animal.healthConditions || "");
-    
-    // Debug: Log what we're sending
-    console.log("Sending request with:", {
-      video: animal.video ? animal.video.name : "no video",
-      species: animal.animal.species,
-      age: animal.animal.age,
-      diet: animal.animal.diet
-    });
 
     try {
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5001";
       
-      // Make the request with timeout
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minute timeout
+      const timeoutId = setTimeout(() => controller.abort(), 300000);
       
       const response = await fetch(`${API_URL}/analyze`, {
         method: "POST",
@@ -84,7 +75,7 @@ const Animal = ({ animal, onUpdate, onRemove, canRemove }) => {
                  error.message.includes("NetworkError") ||
                  error.message.includes("Network request failed") ||
                  error.message.includes("fetch")) {
-        errorMessage = "Cannot connect to backend. Please make sure:\n1. Backend is running (./START_BACKEND.sh)\n2. Backend is on http://localhost:5000\n3. No firewall is blocking the connection";
+        errorMessage = "Cannot connect to backend. Please make sure the backend is running on http://localhost:5001";
       }
       onUpdate({ 
         error: errorMessage,
@@ -97,13 +88,21 @@ const Animal = ({ animal, onUpdate, onRemove, canRemove }) => {
     <div className="animal-card">
       <div className="animal-header">
         <div className="animal-title-section">
+          <div className="animal-number-badge">{animal.name.replace('Subject ', '')}</div>
           <h2 className="animal-title">{animal.name}</h2>
           <button
             className="expand-button"
             onClick={() => setIsExpanded(!isExpanded)}
             aria-label={isExpanded ? "Collapse" : "Expand"}
           >
-            {isExpanded ? "▼" : "▶"}
+            <svg 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              className={isExpanded ? 'expanded' : ''}
+            >
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </button>
         </div>
         {canRemove && (
@@ -112,12 +111,14 @@ const Animal = ({ animal, onUpdate, onRemove, canRemove }) => {
             onClick={onRemove}
             aria-label="Remove animal"
           >
-            ×
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </button>
         )}
       </div>
 
-      {isExpanded && (
+      <div className={`animal-content-wrapper ${isExpanded ? 'expanded' : 'collapsed'}`}>
         <div className="animal-content">
           <AnimalParameters
             animal={animal.animal}
@@ -137,18 +138,26 @@ const Animal = ({ animal, onUpdate, onRemove, canRemove }) => {
             >
               {animal.loading ? (
                 <>
-                  <span className="spinner"></span>
-                  Analyzing...
+                  <div className="spinner"></div>
+                  <span>Analyzing...</span>
                 </>
               ) : (
-                "Analyze Pig Behavior"
+                <>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Analyze Behavior</span>
+                </>
               )}
             </button>
           </div>
 
           {animal.error && (
             <div className="error-message">
-              {animal.error}
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <div className="error-text">{animal.error}</div>
             </div>
           )}
 
@@ -156,10 +165,9 @@ const Animal = ({ animal, onUpdate, onRemove, canRemove }) => {
             <AnalysisResults analysis={animal.analysis} />
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
 export default Animal;
-
