@@ -14,7 +14,7 @@
 }
 
 .animal-header {
-  background: #6a9a5a;
+  background: #b8865a;
   color: white;
   padding: 1rem 1.5rem;
   display: flex;
@@ -87,13 +87,13 @@
 .analyze-section {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 2px solid #a5d6a7;
+  border-top: 2px solid #d4a574;
 }
 
 .analyze-button {
   width: 100%;
   padding: 0.875rem 1.5rem;
-  background: #4a9d3a;
+  background: #d4a574;
   color: white;
   border: none;
   border-radius: 2px;
@@ -105,10 +105,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .analyze-button:hover:not(:disabled) {
-  background: #3d7a2e;
+  background: #b8865a;
 }
 
 .analyze-button:disabled {

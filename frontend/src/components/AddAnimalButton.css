@@ -2,7 +2,7 @@
   width: 100%;
   padding: 1.5rem;
   background: #ffffff;
-  border: 2px dashed #81c784;
+  border: 2px dashed #d4a574;
   border-radius: 2px;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
@@ -19,7 +19,7 @@
 }
 
 .add-animal-button:hover {
-  border-color: #4a9d3a;
+  border-color: #b8865a;
   background: #f9f9f9;
 }
 
@@ -27,7 +27,7 @@
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1;
-  color: #4a9d3a;
+  color: #d4a574;
 }
 
 .add-text {

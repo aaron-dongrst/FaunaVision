@@ -18,28 +18,18 @@ const AnalysisResults = ({ analysis }) => {
         </div>
 
         <div className="result-card">
-          <div className="result-label">Behavior Observed</div>
-          <div className="result-value">{analysis.behavior_observed || "N/A"}</div>
+          <div className="result-label">Primary Behavior</div>
+          <div className="result-value">
+            {analysis.primary_behavior ? 
+              `${analysis.primary_behavior.charAt(0).toUpperCase() + analysis.primary_behavior.slice(1)} (${(analysis.primary_behavior_percentage * 100).toFixed(1)}%)` : 
+              "N/A"}
+          </div>
         </div>
 
         <div className="result-card">
           <div className="result-label">Duration</div>
           <div className="result-value">
             {analysis.length_seconds ? `${analysis.length_seconds}s (${analysis.length_minutes}min)` : "N/A"}
-          </div>
-        </div>
-
-        <div className="result-card">
-          <div className="result-label">Pattern</div>
-          <div className="result-value">
-            {analysis.is_repeating ? "Repetitive" : "Normal"}
-          </div>
-        </div>
-
-        <div className="result-card">
-          <div className="result-label">Confidence</div>
-          <div className="result-value">
-            {analysis.confidence ? `${(analysis.confidence * 100).toFixed(1)}%` : "N/A"}
           </div>
         </div>
 
@@ -50,6 +40,30 @@ const AnalysisResults = ({ analysis }) => {
           </div>
         </div>
       </div>
+
+      {analysis.behavior_percentages && (
+        <div className="behavior-percentages-section">
+          <h4 className="percentages-title">Behavior Time Distribution</h4>
+          <div className="percentages-container">
+            {Object.entries(analysis.behavior_percentages).map(([behavior, percentage]) => (
+              <div key={behavior} className="percentage-item">
+                <div className="percentage-label">
+                  {behavior.charAt(0).toUpperCase() + behavior.slice(1)}
+                </div>
+                <div className="percentage-bar-container">
+                  <div 
+                    className="percentage-bar" 
+                    style={{ width: `${percentage * 100}%` }}
+                  ></div>
+                </div>
+                <div className="percentage-value">
+                  {(percentage * 100).toFixed(1)}%
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {analysis.reasoning && (
         <div className="reasoning-section">
