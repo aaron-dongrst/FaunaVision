@@ -1,5 +1,7 @@
 .video-upload {
   margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .upload-area {
@@ -12,6 +14,8 @@
   background: var(--background-light);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .upload-area::before {
@@ -44,7 +48,7 @@
 }
 
 .upload-icon {
-  width: 64px;
+  width: 80px;
   height: 64px;
   background: var(--background-gradient);
   border-radius: 16px;
@@ -52,10 +56,14 @@
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   font-weight: 700;
   box-shadow: var(--shadow-md);
   animation: float 3s ease-in-out infinite;
+  padding: 0.5rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
 }
 
 @keyframes float {
@@ -88,6 +96,8 @@
   padding: 1rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .video-icon {

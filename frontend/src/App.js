@@ -20,7 +20,7 @@ function App() {
     const newId = Math.max(...animals.map(a => a.id), 0) + 1;
     const newAnimal = {
       id: newId,
-      name: `Subject ${newId}`,
+      name: `Animal ${newId}`,
       animal: {
         species: "",
         age: "",
@@ -40,7 +40,7 @@ function App() {
     if (animals.length === 0) {
       const newAnimal = {
         id: 1,
-        name: `Subject 1`,
+        name: `Animal 1`,
         animal: {
           species: "",
           age: "",
