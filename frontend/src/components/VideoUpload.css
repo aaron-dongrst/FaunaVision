@@ -2,6 +2,10 @@
   margin-bottom: 2rem;
 }
 
+.required {
+  color: #e53e3e;
+}
+
 .upload-area {
   border: 2px dashed #cbd5e0;
   border-radius: 2px;

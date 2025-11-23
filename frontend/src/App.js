@@ -56,6 +56,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="header-content">
+          <img src="/FaunaVisionLogo.png" alt="FaunaVision Logo" className="header-logo" />
           <h1>FaunaVision</h1>
         </div>
       </header>

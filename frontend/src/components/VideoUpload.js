@@ -47,7 +47,9 @@ const VideoUpload = ({ video, onChange }) => {
 
   return (
     <div className="video-upload">
-      <h3 className="section-title">Video Upload</h3>
+      <h3 className="section-title">
+        Video Upload <span className="required">*</span>
+      </h3>
       
       <div
         className="upload-area"
